@@ -33,6 +33,13 @@ $routes->group('admin', ['filter' => 'auth'], function($routes) {
     $routes->post('permission-update','Admin\PermissionController::update');
     $routes->post('permission-delete', 'Admin\PermissionController::delete');
 
+    //kullanıcı gurubu işlemleri
+    $routes->get('user-groups','Admin\UserGroupController::index');
+    $routes->post('user-group-add','Admin\UserGroupController::store');
+    $routes->post('group-get-single','Admin\UserGroupController::get_single');
+    $routes->post('group-update','Admin\UserGroupController::update');
+    $routes->post('user-group-delete','Admin\UserGroupController::delete');
+
 });
 
 

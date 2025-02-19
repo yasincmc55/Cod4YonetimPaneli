@@ -102,7 +102,7 @@
                         <li class="nav-item">
                             <a href="<?= base_url('admin/user-permissions')?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Kullanıcı Grubu Yetkileri</p>
+                                <p>Kullanıcı Gurubu Yetkileri</p>
                             </a>
                         </li>
                     </ul>
@@ -111,6 +111,14 @@
                             <a href="<?= base_url('admin/permissions')?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Yetki Düzenleme</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('admin/user-groups')?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Kullanıcı Gurupları</p>
                             </a>
                         </li>
                     </ul>

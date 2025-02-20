@@ -10,7 +10,6 @@ class AuthController extends BaseController
 
     public function index()
     {
-       
         echo view('admin/auth/login');
     }
 
@@ -31,12 +30,16 @@ class AuthController extends BaseController
             return "Giriş bilgileri hatalı";
         }
 
+        $userPermissions = $userModel->getUserPermissions($user['id']);
+        $permissionArray = array_column($userPermissions,'per_key');
+
         $sessionData = [
             'user_id'=>$user['id'],
             'username'=>$user['username'],
             'email'=>$user['email'],
-            'user_group'=>$user['user_group_id'],
+            'user_group_id'=>$user['user_group_id'],
             'token'=>$user['token'],
+            'user_permissions'=>$permissionArray,
             'logged_in'=>true
         ];
 
@@ -46,11 +49,10 @@ class AuthController extends BaseController
     }
 
 
+
     public function logout()
     {
-
         session()->destroy();
-
         return redirect()->to('admin/login');
     }
 

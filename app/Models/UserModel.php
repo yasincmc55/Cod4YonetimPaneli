@@ -13,5 +13,17 @@ class UserModel extends Model{
                   ->findAll();
    }
 
+    public function getUserPermissions($userId)
+    {
+        return $this->db->table('user_group_permissions')
+            ->select('permissions.per_key')
+            ->join('permissions', 'permissions.id = user_group_permissions.permission_id')
+            ->join('user_groups', 'user_groups.id = user_group_permissions.user_group_id')
+            ->join('users', 'users.user_group_id = user_groups.id')
+            ->where('users.id', $userId)
+            ->get()
+            ->getResultArray();
+    }
+
 
 }

@@ -60,6 +60,8 @@ class PermissionController extends BaseController
 
     public function permissionList()
     {
+        permissionCheck('user_grub_management');
+
         $per = new PermissionModel();
         $permissions = $per->findAll();
         $data['permissions'] = $permissions;

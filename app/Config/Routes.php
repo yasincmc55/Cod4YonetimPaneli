@@ -27,7 +27,7 @@ $routes->group('admin', ['filter' => 'auth'], function($routes) {
     $routes->post('user-save-permissions', 'Admin\PermissionController::userSavePermissions');
 
     //yetki düzenleme
-    $routes->get('permissions','Admin\PermissionController::permissionList');
+    $routes->get('permissions', 'Admin\PermissionController::permissionList');
     $routes->post('permission-add','Admin\PermissionController::store');
     $routes->post('permission-get-single','Admin\PermissionController::get_single');
     $routes->post('permission-update','Admin\PermissionController::update');

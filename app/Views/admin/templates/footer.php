@@ -15,6 +15,19 @@
 </div>
 <!-- ./wrapper -->
 
+<?php if (session()->getFlashdata('permission_error')) : ?>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Yetki Hatası!',
+                text: '<?= session()->getFlashdata('permission_error'); ?>',
+                confirmButtonText: 'Tamam'
+            });
+        });
+    </script>
+<?php endif; ?>
 
 <!-- jQuery UI 1.11.4 -->
 <script src="<?= base_url('assets/admin/') ?>plugins/jquery-ui/jquery-ui.min.js"></script>

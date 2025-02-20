@@ -5,14 +5,16 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Models\UserGroupModel;
 
-class UserGroupController extends BaseController{
-    public function index(){
+class UserGroupController extends BaseController
+{
+    public function index()
+    {
         $userGroupModel = new UserGroupModel();
         $uGroups = $userGroupModel->findAll();
-        return view('admin/templates/head').
-            view('admin/templates/header').
-            view('admin/templates/sidebar').
-            view('admin/user_groups',['ugroups'=>$uGroups]).
+        return view('admin/templates/head') .
+            view('admin/templates/header') .
+            view('admin/templates/sidebar') .
+            view('admin/user_groups', ['ugroups' => $uGroups]) .
             view('admin/templates/footer');
     }
 
@@ -108,8 +110,5 @@ class UserGroupController extends BaseController{
             ]);
         }
     }
-
-
-
 
 }

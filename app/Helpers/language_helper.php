@@ -10,8 +10,4 @@ if (!function_exists('translate')) {
 
         return $translation ? $translation['value'] : 'Çeviri Bulunamadı';
     }
-
-
 }
-
-

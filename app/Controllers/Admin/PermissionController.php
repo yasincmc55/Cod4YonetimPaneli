@@ -24,10 +24,10 @@ class PermissionController extends BaseController
             $groupPermissions[$gp['user_group_id']][] = $gp['permission_id'];
         }
 
-        return view('admin/templates/head').
-               view('admin/templates/header').
-               view('admin/templates/sidebar').
-               view('admin/user-group-permissions',[
+        return view('admin/templates/head') .
+            view('admin/templates/header') .
+            view('admin/templates/sidebar') .
+            view('admin/user-group-permissions', [
                 'groups' => $groups,
                 'permissions' => $permissions,
                 'groupPermissions' => $groupPermissions,
@@ -66,11 +66,12 @@ class PermissionController extends BaseController
         $permissions = $per->findAll();
         $data['permissions'] = $permissions;
 
-        return view('admin/templates/head').
-               view('admin/templates/header').
-               view('admin/templates/sidebar').
-               view('admin/permissions', $data).
-               view('admin/templates/footer');
+        return
+        view('admin/templates/head').
+        view('admin/templates/header').
+        view('admin/templates/sidebar').
+        view('admin/permissions', $data).
+        view('admin/templates/footer');
     }
 
     public function store()

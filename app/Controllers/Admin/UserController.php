@@ -1,25 +1,29 @@
-<?php 
+<?php
+
 namespace App\Controllers\Admin;
+
 use App\Controllers\BaseController;
 use App\Models\UserModel;
 use App\Models\UserGroupModel;
 
-class UserController extends BaseController{
-    public function index(){
-       $user = new UserModel();
-       $users = $user->get_users();
+class UserController extends BaseController
+{
+    public function index()
+    {
+        $user = new UserModel();
+        $users = $user->get_users();
 
-       $roles = new UserGroupModel();
-       $roles = $roles->findAll();
+        $roles = new UserGroupModel();
+        $roles = $roles->findAll();
 
-       $data['users'] = $users;
-       $data['roles'] = $roles;
+        $data['users'] = $users;
+        $data['roles'] = $roles;
 
-       echo view('admin/templates/head');
-       echo view('admin/templates/header');
-       echo view('admin/templates/sidebar');
-       echo view('admin/users',$data);
-       echo view('admin/templates/footer');
+        echo view('admin/templates/head');
+        echo view('admin/templates/header');
+        echo view('admin/templates/sidebar');
+        echo view('admin/users', $data);
+        echo view('admin/templates/footer');
     }
 
 
@@ -46,7 +50,7 @@ class UserController extends BaseController{
             'email' => $email,
             'password' => $hashedPassword,
             'user_group_id' => $user_group,
-            'token'=>$token,
+            'token' => $token,
             'status' => $status
         ];
 
@@ -68,7 +72,8 @@ class UserController extends BaseController{
     }
 
 
-    public function user_get_single(){
+    public function user_get_single()
+    {
         $user_id = $this->request->getPost('id');
 
         $userModel = new UserModel();
@@ -102,7 +107,7 @@ class UserController extends BaseController{
         $updateData = [
             'username' => $username,
             'email' => $email,
-            'user_group_id'=>$role,
+            'user_group_id' => $role,
             'status' => $status,
         ];
 

@@ -27,7 +27,7 @@
                         <div class="card-header">
                             <h3 class="card-title">KULLANICILAR</h3>
 
-                            <div class="card-tools d-flex">
+                            <div class="card-tools d-flex align-items-center">
                                 <button type="button" class="btn btn-primary mr-2" data-toggle="modal"
                                         data-target="#addRoomModal">Kullanıcı Ekle
                                 </button>

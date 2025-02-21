@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\UserModel;
 use App\Models\UserGroupModel;
 use App\Models\PermissionModel;
 use App\Models\UserGroupPermissionModel;
@@ -38,14 +39,15 @@ class PermissionController extends BaseController
     public function userSavePermissions()
     {
         $groupPermissionModel = new UserGroupPermissionModel();
+        $userModel = new UserModel();
 
-        // POST verilerini al
+
         $permissionsData = $this->request->getPost('permissions');
 
-        // Tüm grup yetkilerini temizle
+
         $groupPermissionModel->truncate();
 
-        // Yeni yetkileri ekle
+
         foreach ($permissionsData as $groupId => $permissionIds) {
             foreach ($permissionIds as $permissionId) {
                 $groupPermissionModel->insert([
@@ -54,9 +56,19 @@ class PermissionController extends BaseController
                 ]);
             }
         }
-        session()->setFlashdata('success', 'Yetkiler Başarıyla kaydedildi');
+
+        $userId = session()->get('user_id');
+        if ($userId) {
+            $userPermissions = $userModel->getUserPermissions($userId);
+            $permissionArray = array_column($userPermissions, 'per_key');
+
+            session()->set('user_permissions', $permissionArray);
+        }
+
+        session()->setFlashdata('success', 'Yetkiler başarıyla kaydedildi');
         return redirect()->to('/admin/user-permissions');
     }
+
 
     public function permissionList()
     {
@@ -76,6 +88,7 @@ class PermissionController extends BaseController
 
     public function store()
     {
+        permissionCheck('permission_store');
         $per = new PermissionModel();
 
         $per_name = $this->request->getPost('per_name');

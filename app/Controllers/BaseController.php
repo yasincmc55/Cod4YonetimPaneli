@@ -8,6 +8,10 @@ use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use App\Models\CategoryModel;
+
+
+
 
 /**
  * Class BaseController
@@ -21,6 +25,15 @@ use Psr\Log\LoggerInterface;
  */
 abstract class BaseController extends Controller
 {
+
+
+    protected function renderView($view, $data = [])
+    {
+        echo view('front/templates/head',$data);
+        echo view('front/templates/header');
+        echo view($view, $data);
+        echo view('front/templates/footer');
+    }
     /**
      * Instance of the main Request object.
      *

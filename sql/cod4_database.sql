@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 18 Şub 2025, 16:15:02
+-- Üretim Zamanı: 25 Şub 2025, 09:31:12
 -- Sunucu sürümü: 10.4.32-MariaDB
 -- PHP Sürümü: 8.0.30
 
@@ -60,12 +60,10 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `name`, `per_key`, `status`) VALUES
-(1, 'kullanıcı yönetufd', 'manage_users123d', 1),
-(2, 'Oda düzenle', 'edit_rooms', 1),
-(3, 'rezervasyon göster', 'view_reservations', 1),
+(3, 'rezervasyon gösterhgh', 'view_reservations', 1),
 (4, 'ödemeleri yönet', 'manage_payments', 1),
-(9, 'test', 'test123', 1),
-(13, 'sdsdsd', 'dsdsd', 1);
+(19, 'Kullanıcı grubu yetkileri', 'user_grub_management_list', 1),
+(21, 'Yetki Kaydetme', 'permission_store', 1);
 
 -- --------------------------------------------------------
 
@@ -105,7 +103,6 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `user_group_id`, `token`, `status`, `created_at`, `updated_at`) VALUES
-(2, 'çalışan1', 'calisan@otel.com', '$2y$10$wJvelJoWPRwx3nXWkGUyB..RpMYNwO6VVuyNUUOVb4YLJIzxCcVeu', 2, '', 1, '2025-02-10 13:19:28', '2025-02-10 15:15:04'),
 (6, 'yasin', 'yasincmc2012@gmail.com', '$2y$10$ZM4kAyVtVykcEU626GgGPukBb35lnhflEQTJ/IOGi2IpQD72or17.', 3, 'wdMs73KRaMKNxi1gTb7a', 1, '2025-02-10 15:19:11', '2025-02-18 14:58:21'),
 (15, 'test', 'gepota1367@evasud.com', '$2y$10$nmhySNexeeqTelZbNYs/ju29SOLI.XeBDWb1sv9hY5JHDt.PQJcyS', 1, 'npHjHjifcDvxIEpgeYo1LjJlHgZ586', 1, '2025-02-18 15:06:40', '2025-02-18 15:06:40');
 
@@ -117,17 +114,18 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `user_group_id`, `to
 
 CREATE TABLE `user_groups` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(50) NOT NULL COMMENT 'Örn: Admin, User'
+  `name` varchar(50) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Tablo döküm verisi `user_groups`
 --
 
-INSERT INTO `user_groups` (`id`, `name`) VALUES
-(1, 'Admin'),
-(3, 'Super Admin'),
-(2, 'User');
+INSERT INTO `user_groups` (`id`, `name`, `status`) VALUES
+(1, 'Admin', 1),
+(2, 'User', 1),
+(3, 'Super Admin', 1);
 
 -- --------------------------------------------------------
 
@@ -146,15 +144,11 @@ CREATE TABLE `user_group_permissions` (
 --
 
 INSERT INTO `user_group_permissions` (`id`, `user_group_id`, `permission_id`) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(3, 1, 4),
-(7, 2, 1),
-(8, 2, 2),
-(9, 2, 3),
-(4, 3, 1),
-(5, 3, 2),
-(6, 3, 3);
+(1, 1, 3),
+(5, 2, 21),
+(2, 3, 3),
+(3, 3, 4),
+(4, 3, 19);
 
 --
 -- Dökümü yapılmış tablolar için indeksler
@@ -217,7 +211,7 @@ ALTER TABLE `language`
 -- Tablo için AUTO_INCREMENT değeri `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `translations`
@@ -235,13 +229,13 @@ ALTER TABLE `users`
 -- Tablo için AUTO_INCREMENT değeri `user_groups`
 --
 ALTER TABLE `user_groups`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `user_group_permissions`
 --
 ALTER TABLE `user_group_permissions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Dökümü yapılmış tablolar için kısıtlamalar
